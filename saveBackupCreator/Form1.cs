@@ -15,7 +15,6 @@ namespace saveBackupCreator
         public Form1()
         {
             InitializeComponent();
-            this.textBox2.ReadOnly = true;
         }
 
 #pragma warning disable IDE1006 // Naming Styles
@@ -25,9 +24,14 @@ namespace saveBackupCreator
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    textBox1.Text = dialog.SelectedPath;
+                    string text = dialog.SelectedPath;
                 }
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
