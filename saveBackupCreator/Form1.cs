@@ -64,7 +64,16 @@ namespace saveBackupCreator
 
         private void button3_Click(object sender, EventArgs e)
         {
+            string saveLocation = this.comboBox1.GetItemText(this.comboBox1.SelectedItem);
+            string[] files = Directory.GetFiles(saveLocation);
 
+            foreach (string s in files)
+            {
+                if (Path.GetExtension(s).Equals(".bak"))
+                {
+                    File.Copy(s, s.Remove(s.Length - 4, 4), true);
+                }
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
