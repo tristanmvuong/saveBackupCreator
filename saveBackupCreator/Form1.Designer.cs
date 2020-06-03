@@ -1,6 +1,6 @@
 ﻿namespace saveBackupCreator
 {
-    partial class Form1
+    partial class formSaveBackup
     {
         /// <summary>
         /// Required designer variable.
@@ -28,120 +28,121 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBoxSaves = new System.Windows.Forms.ComboBox();
+            this.labelSaves = new System.Windows.Forms.Label();
+            this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonRestore = new System.Windows.Forms.Button();
+            this.buttonUpdate = new System.Windows.Forms.Button();
+            this.labelFrequency = new System.Windows.Forms.Label();
+            this.comboBoxFrequency = new System.Windows.Forms.ComboBox();
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
-            this.button5 = new System.Windows.Forms.Button();
+            this.buttonSaveSettings = new System.Windows.Forms.Button();
+            this.buttonBrowse = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // comboBoxSaves
             // 
-            this.button1.Location = new System.Drawing.Point(47, 157);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "add";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.comboBoxSaves.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSaves.FormattingEnabled = true;
+            this.comboBoxSaves.Location = new System.Drawing.Point(208, 41);
+            this.comboBoxSaves.Name = "comboBoxSaves";
+            this.comboBoxSaves.Size = new System.Drawing.Size(522, 24);
+            this.comboBoxSaves.TabIndex = 3;
+            this.comboBoxSaves.SelectionChangeCommitted += new System.EventHandler(this.comboBoxSaves_SelectionChangeCommitted);
             // 
-            // comboBox1
+            // labelSaves
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(208, 41);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(522, 24);
-            this.comboBox1.TabIndex = 3;
+            this.labelSaves.AutoSize = true;
+            this.labelSaves.Location = new System.Drawing.Point(77, 44);
+            this.labelSaves.Name = "labelSaves";
+            this.labelSaves.Size = new System.Drawing.Size(45, 17);
+            this.labelSaves.TabIndex = 4;
+            this.labelSaves.Text = "saves";
             // 
-            // label1
+            // buttonDelete
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(157, 44);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 17);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "saves";
+            this.buttonDelete.Location = new System.Drawing.Point(139, 157);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
+            this.buttonDelete.TabIndex = 5;
+            this.buttonDelete.Text = "delete";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
-            // button2
+            // buttonRestore
             // 
-            this.button2.Location = new System.Drawing.Point(131, 157);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "delete";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.buttonRestore.Location = new System.Drawing.Point(231, 157);
+            this.buttonRestore.Name = "buttonRestore";
+            this.buttonRestore.Size = new System.Drawing.Size(75, 23);
+            this.buttonRestore.TabIndex = 6;
+            this.buttonRestore.Text = "restore";
+            this.buttonRestore.UseVisualStyleBackColor = true;
+            this.buttonRestore.Click += new System.EventHandler(this.buttonRestore_Click);
             // 
-            // button3
+            // buttonUpdate
             // 
-            this.button3.Location = new System.Drawing.Point(223, 157);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "restore";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.buttonUpdate.Location = new System.Drawing.Point(47, 157);
+            this.buttonUpdate.Name = "buttonUpdate";
+            this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
+            this.buttonUpdate.TabIndex = 7;
+            this.buttonUpdate.Text = "update";
+            this.buttonUpdate.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
-            // button4
+            // labelFrequency
             // 
-            this.button4.Location = new System.Drawing.Point(314, 157);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 7;
-            this.button4.Text = "backup";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.labelFrequency.AutoSize = true;
+            this.labelFrequency.Location = new System.Drawing.Point(15, 93);
+            this.labelFrequency.Name = "labelFrequency";
+            this.labelFrequency.Size = new System.Drawing.Size(107, 17);
+            this.labelFrequency.TabIndex = 8;
+            this.labelFrequency.Text = "frequency (min)";
             // 
-            // label2
+            // comboBoxFrequency
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(44, 93);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(161, 17);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "frequency (backup only)";
+            this.comboBoxFrequency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxFrequency.FormattingEnabled = true;
+            this.comboBoxFrequency.Location = new System.Drawing.Point(208, 90);
+            this.comboBoxFrequency.Name = "comboBoxFrequency";
+            this.comboBoxFrequency.Size = new System.Drawing.Size(121, 24);
+            this.comboBoxFrequency.TabIndex = 9;
             // 
-            // comboBox2
+            // buttonSaveSettings
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(208, 90);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 24);
-            this.comboBox2.TabIndex = 9;
+            this.buttonSaveSettings.Location = new System.Drawing.Point(321, 157);
+            this.buttonSaveSettings.Name = "buttonSaveSettings";
+            this.buttonSaveSettings.Size = new System.Drawing.Size(103, 23);
+            this.buttonSaveSettings.TabIndex = 10;
+            this.buttonSaveSettings.Text = "save settings";
+            this.buttonSaveSettings.UseVisualStyleBackColor = true;
+            this.buttonSaveSettings.Click += new System.EventHandler(this.buttonSaveSettings_Click);
             // 
-            // button5
+            // buttonBrowse
             // 
-            this.button5.Location = new System.Drawing.Point(410, 157);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(103, 23);
-            this.button5.TabIndex = 10;
-            this.button5.Text = "save settings";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.buttonBrowse.Image = global::saveBackupCreator.Properties.Resources.folder1;
+            this.buttonBrowse.Location = new System.Drawing.Point(181, 44);
+            this.buttonBrowse.Name = "buttonBrowse";
+            this.buttonBrowse.Size = new System.Drawing.Size(21, 18);
+            this.buttonBrowse.TabIndex = 11;
+            this.buttonBrowse.UseVisualStyleBackColor = true;
+            this.buttonBrowse.Click += new System.EventHandler(this.buttonBrowse_Click);
             // 
-            // Form1
+            // formSaveBackup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonBrowse);
+            this.Controls.Add(this.buttonSaveSettings);
+            this.Controls.Add(this.comboBoxFrequency);
+            this.Controls.Add(this.labelFrequency);
+            this.Controls.Add(this.buttonUpdate);
+            this.Controls.Add(this.buttonRestore);
+            this.Controls.Add(this.buttonDelete);
+            this.Controls.Add(this.labelSaves);
+            this.Controls.Add(this.comboBoxSaves);
             this.HelpButton = true;
-            this.Name = "Form1";
+            this.Name = "formSaveBackup";
             this.Text = "Save Backup";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -149,16 +150,16 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBoxSaves;
+        private System.Windows.Forms.Label labelSaves;
+        private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Button buttonRestore;
+        private System.Windows.Forms.Button buttonUpdate;
+        private System.Windows.Forms.Label labelFrequency;
+        private System.Windows.Forms.ComboBox comboBoxFrequency;
         private System.Windows.Forms.HelpProvider helpProvider1;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button buttonSaveSettings;
+        private System.Windows.Forms.Button buttonBrowse;
     }
 }
 
