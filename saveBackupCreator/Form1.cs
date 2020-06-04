@@ -136,5 +136,25 @@ namespace saveBackupCreator
                 this.comboBoxFrequency.SelectedItem = 0;
             }
         }
+
+        private void buttonStart_Click(object sender, EventArgs e)
+        {
+            this.buttonStart.Enabled = false;
+            this.buttonUpdate.Enabled = false;
+            this.buttonDelete.Enabled = false;
+            this.buttonRestore.Enabled = false;
+            this.comboBoxFrequency.Enabled = false;
+            this.comboBoxSaves.Enabled = false;
+        }
+
+        private void buttonStop_Click(object sender, EventArgs e)
+        {
+            this.buttonStart.Enabled = true;
+            this.buttonUpdate.Enabled = true;
+            this.buttonDelete.Enabled = true;
+            this.buttonRestore.Enabled = true;
+            this.comboBoxFrequency.Enabled = true;
+            this.comboBoxSaves.Enabled = true;
+        }
     }
 }
