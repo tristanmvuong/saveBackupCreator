@@ -21,6 +21,7 @@ namespace saveBackupCreator
         private readonly string SAVE_LOCATIONS_FILE = "saveLocations.txt";
         private readonly BindingList<int> frequencies = new BindingList<int>(new int[] {0, 1, 5, 10, 15, 30});
         private Dictionary<string, int> settings;
+        private Timer timer1;
 
         public formSaveBackup()
         {
@@ -54,8 +55,7 @@ namespace saveBackupCreator
             }
 
             this.comboBoxSaves.DataSource = saveLocations;
-            int value = 0;
-            if (settings.TryGetValue(this.comboBoxSaves.GetItemText(this.comboBoxSaves.SelectedItem), out value))
+            if (settings.TryGetValue(this.comboBoxSaves.GetItemText(this.comboBoxSaves.SelectedItem), out int value))
             {
                 this.comboBoxFrequency.SelectedItem = value;
             }
@@ -76,6 +76,11 @@ namespace saveBackupCreator
         private void buttonRestore_Click(object sender, EventArgs e)
         {
             string saveLocation = this.comboBoxSaves.GetItemText(this.comboBoxSaves.SelectedItem);
+            if (!Directory.Exists(saveLocation))
+            {
+                return;
+            }
+
             string[] files = Directory.GetFiles(saveLocation);
 
             foreach (string s in files)
@@ -126,8 +131,7 @@ namespace saveBackupCreator
 
         private void comboBoxSaves_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            int value = 0;
-            if (settings.TryGetValue(this.comboBoxSaves.GetItemText(this.comboBoxSaves.SelectedItem), out value))
+            if (settings.TryGetValue(this.comboBoxSaves.GetItemText(this.comboBoxSaves.SelectedItem), out int value))
             {
                 this.comboBoxFrequency.SelectedItem = value;
             }
@@ -139,6 +143,17 @@ namespace saveBackupCreator
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
+            int interval = int.Parse(this.comboBoxFrequency.GetItemText(this.comboBoxFrequency.SelectedItem)) * 60 * 1000;
+            if (interval <= 0)
+            {
+                return;
+            }
+
+            timer1 = new Timer();
+            timer1.Tick += new EventHandler(timer1_Tick);
+            timer1.Interval = interval; // in miliseconds
+            timer1.Start();
+
             this.buttonStart.Enabled = false;
             this.buttonUpdate.Enabled = false;
             this.buttonDelete.Enabled = false;
@@ -149,12 +164,49 @@ namespace saveBackupCreator
 
         private void buttonStop_Click(object sender, EventArgs e)
         {
+            if (timer1 != null)
+            {
+                timer1.Stop();
+            }
+
             this.buttonStart.Enabled = true;
             this.buttonUpdate.Enabled = true;
             this.buttonDelete.Enabled = true;
             this.buttonRestore.Enabled = true;
             this.comboBoxFrequency.Enabled = true;
             this.comboBoxSaves.Enabled = true;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            string saveLocation = this.comboBoxSaves.GetItemText(this.comboBoxSaves.SelectedItem);
+            if (!Directory.Exists(saveLocation))
+            {
+                return;
+            }
+
+            string[] files = Directory.GetFiles(saveLocation);
+            string latest = null;
+            DateTime latestTime = DateTime.MinValue;
+
+            foreach (string s in files)
+            {
+                if (Path.GetExtension(s).Equals(".sav"))
+                {
+                    if (File.GetLastWriteTime(s).CompareTo(latestTime) >= 0)
+                    {
+                        latestTime = File.GetLastWriteTime(s);
+                        latest = s;
+                    }
+                    File.Copy(s, s.Remove(s.Length - 4, 4), true);
+                }
+            }
+
+            if (latest != null)
+            {
+                string copy = Path.Combine(saveLocation, long.Parse(latestTime.ToString("yyyyMMddHHmmss")) + ".sav.bak");
+                File.Copy(latest, copy, true);
+            }
         }
     }
 }
