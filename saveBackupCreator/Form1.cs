@@ -1,4 +1,6 @@
-﻿#pragma warning disable IDE1006 // Naming Styles
+//windows form for backing up save files
+
+#pragma warning disable IDE1006 // Naming Styles
 
 using System;
 using System.Collections.Generic;
@@ -34,6 +36,7 @@ namespace saveBackupCreator
 
             try
             {
+                //retrieves locations of save files and backup frequency that were written to the settings file
                 string[] settingsFromFile = File.ReadAllLines(Path.Combine(localAppDir, APP_DIR, SAVE_LOCATIONS_FILE));
                 foreach (string s in settingsFromFile)
                 {
@@ -54,6 +57,7 @@ namespace saveBackupCreator
                 Console.WriteLine(e.StackTrace);
             }
 
+            //sets the selected frequency to either a saved value or 0
             this.comboBoxSaves.DataSource = saveLocations;
             if (settings.TryGetValue(this.comboBoxSaves.GetItemText(this.comboBoxSaves.SelectedItem), out int value))
             {
@@ -65,6 +69,7 @@ namespace saveBackupCreator
             }
         }
 
+        //deletes a saved location
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             string selectedItem = this.comboBoxSaves.GetItemText(this.comboBoxSaves.SelectedItem);
@@ -73,6 +78,7 @@ namespace saveBackupCreator
             saveLocations.Remove(selectedItem);
         }
 
+        //removes the .bak from the latest backup
         private void buttonRestore_Click(object sender, EventArgs e)
         {
             string saveLocation = this.comboBoxSaves.GetItemText(this.comboBoxSaves.SelectedItem);
@@ -92,6 +98,7 @@ namespace saveBackupCreator
             }
         }
 
+        //updates the save location and backup frequency in a temporary data structure
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
             string selectedItem = this.comboBoxSaves.GetItemText(this.comboBoxSaves.SelectedItem);
@@ -104,6 +111,7 @@ namespace saveBackupCreator
             }
         }
 
+        //writes the latest updates to the settings file
         private void buttonSaveSettings_Click(object sender, EventArgs e)
         {
             List<string> settingsList = new List<string>();
@@ -114,6 +122,7 @@ namespace saveBackupCreator
             File.WriteAllLines(Path.Combine(localAppDir, APP_DIR, SAVE_LOCATIONS_FILE), settingsList);
         }
 
+        //brings up the browse folder dialog so the save location can be chosen
         private void buttonBrowse_Click(object sender, EventArgs e)
         {
             using (FolderBrowserDialog dialog = new FolderBrowserDialog())
@@ -129,6 +138,7 @@ namespace saveBackupCreator
             }
         }
 
+        //backup frequency is always set to a value
         private void comboBoxSaves_SelectionChangeCommitted(object sender, EventArgs e)
         {
             if (settings.TryGetValue(this.comboBoxSaves.GetItemText(this.comboBoxSaves.SelectedItem), out int value))
@@ -140,7 +150,8 @@ namespace saveBackupCreator
                 this.comboBoxFrequency.SelectedItem = 0;
             }
         }
-
+        
+        //save backup tick start
         private void buttonStart_Click(object sender, EventArgs e)
         {
             int interval = int.Parse(this.comboBoxFrequency.GetItemText(this.comboBoxFrequency.SelectedItem)) * 60 * 1000;
@@ -162,6 +173,7 @@ namespace saveBackupCreator
             this.comboBoxSaves.Enabled = false;
         }
 
+        //save backup tick stops
         private void buttonStop_Click(object sender, EventArgs e)
         {
             if (timer1 != null)
@@ -177,6 +189,7 @@ namespace saveBackupCreator
             this.comboBoxSaves.Enabled = true;
         }
 
+        //creates a copy of the latest .sav file in the chosen location
         private void timer1_Tick(object sender, EventArgs e)
         {
             string saveLocation = this.comboBoxSaves.GetItemText(this.comboBoxSaves.SelectedItem);
